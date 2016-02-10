@@ -19,10 +19,11 @@
         <groupId>org.beamfoundry.spring-jnrpe</groupId>
         <artifactId>org.beamfoundry.spring-jnrpe-parent</artifactId>
         <version>1.0.0-SNAPSHOT</version>
+        <relativePath>../spring-jnrpe-parent/pom.xml</relativePath>
     </parent>
-    <groupId>org.beamfoundry.spring-jnrpe</groupId>
+    
     <artifactId>org.beamfoundry.spring-jnrpe-test</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+
     <name>Spring JNRPE : Test Server</name>
     <description>Spring JNRPE test server</description>
     <properties>
@@ -31,8 +32,30 @@
     </properties>
     <dependencies>
         <dependency>
-            <groupId>net.sf.jnrpe</groupId>
-            <artifactId>jnrpe-lib</artifactId>
+            <groupId>org.beamfoundry.spring-jnrpe</groupId>
+            <artifactId>org.beamfoundry.spring-jnrpe-server</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.beamfoundry.spring-jnrpe</groupId>
+            <artifactId>org.beamfoundry.spring-jnrpe-plugins</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
     </dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
 </project>
