@@ -8,8 +8,8 @@ import it.jnrpe.plugins.annotations.Option;
 import it.jnrpe.plugins.annotations.Plugin;
 import it.jnrpe.plugins.annotations.PluginOptions;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,14 +28,15 @@ public class URLMonitoringInterceptor extends PluginBase implements HandlerInter
 	
 	protected final Logger log = LoggerFactory.getLogger(this.getClass());
 	
-	private Map <String,Integer> urlMap = new HashMap<String,Integer>();
+	private Map <String,JNRPEURLMonitorRecord> urlMap = new ConcurrentHashMap<String,JNRPEURLMonitorRecord>();
 	
 	public final ReturnValue execute(final ICommandLine cl) {
-		if (!urlMap.containsKey(cl.getOptionValue("url"))) {
-			return new ReturnValue(Status.UNKNOWN, "URL : " + cl.getOptionValue("url") + " undefined");
+		String url = cl.getOptionValue("url");
+		if (urlMap.containsKey(cl.getOptionValue("url"))) {
+			return new ReturnValue(Status.OK, "URL : " + url + " " + urlMap.get(url).getCount());
 		}else{
-			String url = cl.getOptionValue("url");
-			return new ReturnValue(Status.OK, "URL : " + url + " " + urlMap.get(url));
+			urlMap.put(url, new JNRPEURLMonitorRecord());
+			return new ReturnValue(Status.UNKNOWN, "URL : " + cl.getOptionValue("url") + " registered");
 		}
 	}
 
@@ -49,11 +50,8 @@ public class URLMonitoringInterceptor extends PluginBase implements HandlerInter
 			HttpServletResponse response, Object handler, Exception ex)
 			throws Exception {
 		String url = request.getRequestURI();
-		if (!urlMap.containsKey(url)) {
-			log.debug("Adding URL :"+url);
-			urlMap.put(url, 1);
-		}else{
-			urlMap.put(url, urlMap.get(url)+1);
+		if (urlMap.containsKey(url)) {
+			urlMap.get(url).incrementMethodCounter(request.getMethod());
 		}
 		
 	}
@@ -65,8 +63,8 @@ public class URLMonitoringInterceptor extends PluginBase implements HandlerInter
 	}
 
 	@Override
-	public boolean preHandle(HttpServletRequest arg0, HttpServletResponse arg1,
-			Object arg2) throws Exception {
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
+			Object handler) throws Exception {
 		return true;
 	}
 
