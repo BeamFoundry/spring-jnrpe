@@ -13,31 +13,36 @@
 		WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 		See the License for the specific language governing permissions and
 		limitations under the License.
--->
+    -->
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.beamfoundry</groupId>
-    <artifactId>org.beamfoundry.spring-jnrpe</artifactId>
+    <parent>
+        <groupId>org.beamfoundry.spring-jnrpe</groupId>
+        <artifactId>spring-jnrpe-parent</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <relativePath>../parent/pom.xml</relativePath>
+    </parent>
+    <groupId>org.beamfoundry.spring-jnrpe</groupId>
+    <artifactId>spring-jnrpe-server</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-    <packaging>pom</packaging>
-    <name>Spring JNRPE : Project</name>
-    <description>This project provides a JNRPE server for Spring</description>
-    <url>https://github.com/BeamFoundry/spring-jnrpe</url>
-    <scm>
-        <connection>scm:git:git@github.com:BeamFoundry/spring-jnrpe.git</connection>
-        <developerConnection>scm:git:git@github.com:BeamFoundry/spring-jnrpe.git</developerConnection>
-        <url>git@github.com:BeamFoundry/spring-jnrpe.git</url>
-        <tag>HEAD</tag>
-    </scm>
-    <modules>
-        <module>jnrpe-lib</module>
-        <module>parent</module>
-        <module>server</module>
-        <module>plugins</module>
-        <module>test</module>
-    </modules>
+    <name>Spring JNRPE : Server</name>
+    <description>Spring JNRPE Server</description>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.7</java.version>
-        <jnrpe.version>2.0.5</jnrpe.version>
     </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.beamfoundry.spring-jnrpe</groupId>
+            <artifactId>jnrpe-lib</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
 </project>
