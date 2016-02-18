@@ -1,4 +1,4 @@
-package org.beamfoundry.jnrpe.test;
+package org.beamfoundry.jnrpe.plugins.web;
 
 import it.jnrpe.ICommandLine;
 import it.jnrpe.ReturnValue;
@@ -16,26 +16,24 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-@Component
-@Plugin(name = "URL", description = "Check a URL")
+@Plugin(name = "CHECK_URL", description = "Check a URL")
 @PluginOptions({
     @Option(shortName = "u", longName = "url", description = "the URL to check", required = true, hasArgs = true, argName = "text", optionalArgs = false, option = "text")  })
-public class URLMonitoringInterceptor extends PluginBase implements HandlerInterceptor {
+public class URLMonitoringPlugin extends PluginBase implements HandlerInterceptor {
 	
 	protected final Logger log = LoggerFactory.getLogger(this.getClass());
 	
-	private Map <String,JNRPEURLMonitorRecord> urlMap = new ConcurrentHashMap<String,JNRPEURLMonitorRecord>();
+	private Map <String,URLMonitorModel> urlMap = new ConcurrentHashMap<String,URLMonitorModel>();
 	
 	public final ReturnValue execute(final ICommandLine cl) {
 		String url = cl.getOptionValue("url");
 		if (urlMap.containsKey(cl.getOptionValue("url"))) {
 			return new ReturnValue(Status.OK, "URL : " + url + " " + urlMap.get(url).getCount());
 		}else{
-			urlMap.put(url, new JNRPEURLMonitorRecord());
+			urlMap.put(url, new URLMonitorModel());
 			return new ReturnValue(Status.UNKNOWN, "URL : " + cl.getOptionValue("url") + " registered");
 		}
 	}

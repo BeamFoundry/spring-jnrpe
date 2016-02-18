@@ -91,6 +91,7 @@ public class JNRPEAutoConfiguration {
 			PluginDefinition pdef = PluginRepositoryUtil.loadFromPluginAnnotation(entry.getValue());
 			pr.addPluginDefinition(pdef);
 		}
+
 		return pr;
 	}
 	

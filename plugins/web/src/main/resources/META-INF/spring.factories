@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-org.beamfoundry.jnrpe.plugins.CorePluginsAutoConfiguration
+org.beamfoundry.jnrpe.plugins.WebPluginsAutoConfiguration

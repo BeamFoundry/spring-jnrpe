@@ -17,7 +17,7 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.beamfoundry</groupId>
-        <artifactId>org.beamfoundry.spring-jnrpe</artifactId>
+        <artifactId>spring-jnrpe</artifactId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
     <groupId>org.beamfoundry.spring-jnrpe</groupId>
@@ -32,6 +32,7 @@
         <jnrpe.version>2.0.5</jnrpe.version>
         <spring.boot>1.3.2.RELEASE</spring.boot>
     </properties>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -73,6 +74,12 @@
                         <encoding>${project.build.sourceEncoding}</encoding>
                     </configuration>
                 </plugin>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>${spring.boot}</version>
+                </plugin>
+
             </plugins>
         </pluginManagement>
     </build>

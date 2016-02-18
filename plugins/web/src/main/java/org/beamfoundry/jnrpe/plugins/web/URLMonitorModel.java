@@ -1,10 +1,10 @@
-package org.beamfoundry.jnrpe.test;
+package org.beamfoundry.jnrpe.plugins.web;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class JNRPEURLMonitorRecord {
+public class URLMonitorModel {
 
 	private Map<String,AtomicInteger> methodCallCounter = new ConcurrentHashMap<String,AtomicInteger>();
 	

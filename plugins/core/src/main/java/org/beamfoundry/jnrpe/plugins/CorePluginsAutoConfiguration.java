@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @ConditionalOnProperty(prefix = "jnrpe.server", name = "enabled", havingValue = "true", matchIfMissing = true)
-public class JNRPEPluginsAutoConfiguration {
+public class CorePluginsAutoConfiguration {
 
 	@Bean
 	public CTestPlugin jNRPETestPlugin() {

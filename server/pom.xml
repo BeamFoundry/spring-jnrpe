@@ -21,7 +21,6 @@
         <version>1.0.0-SNAPSHOT</version>
         <relativePath>../parent/pom.xml</relativePath>
     </parent>
-    <groupId>org.beamfoundry.spring-jnrpe</groupId>
     <artifactId>spring-jnrpe-server</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <name>Spring JNRPE : Server</name>
